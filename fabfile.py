@@ -60,5 +60,5 @@ def deploy(version=None):
                                            'setup.py', '--version']).strip()
 
     # Build the package
-    subprocess.check_output(['python', 'setup.py', 'sdist', 'upload', '-r', 'pypitest'])
+    subprocess.check_output(['python', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])
 
