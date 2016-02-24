@@ -18,7 +18,7 @@ setup(
     license='MIT',
     keywords='stackexchange',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*', 'test']),
-    version='0.1.1',
+    version='0.1.2',
     install_requires=['requests'],
     classifiers=[
         'Development Status :: 4 - Beta',
