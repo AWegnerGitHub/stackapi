@@ -1,1 +1,1 @@
-from stackapi.stackapi import StackAPI
+from stackapi import StackAPI
