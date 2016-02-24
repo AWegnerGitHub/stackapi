@@ -10,7 +10,7 @@ setup(
     name='StackAPI',
     description='Library for interacting with the Stack Exchange API',
     long_description=long_description,
-    url='',
+    url='https://github.com/AWegnerGitHub/StackAPI',
     author='Andrew Wegner',
     author_email='pypi@andrewwegner.com',
     maintainer='Andrew Wegner',
@@ -18,7 +18,7 @@ setup(
     license='MIT',
     keywords='stackexchange',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*', 'test']),
-    version='0.1.1.dev',
+    version='0.1.1',
     install_requires=['requests'],
     classifiers=[
         'Development Status :: 4 - Beta',
