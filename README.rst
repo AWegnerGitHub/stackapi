@@ -25,8 +25,10 @@ Establish a connection to Stack Overflow and gather some comments
     comments = SITE.fetch('comments')
 
 The above, will issue a call to the
-```/comments`` <http://api.stackexchange.com/docs/comments>`__ end point
-on Stack Overflow.
+|comments|_. end point on Stack Overflow.
+
+.. |comments| replace:: ``comments``
+.. _comments: http://api.stackexchange.com/docs/comments
 
 If you wish to interact with the API's ``write`` functions, you can pass
 additional parameters to the ``SITE`` variable:
