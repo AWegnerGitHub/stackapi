@@ -27,11 +27,6 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Topic :: Software Development :: Libraries :: Python Modules'
-    ]
+    ],
+    test_suite='tests'
 )
-
-# Name ideas:
-# StackEAPI
-# StackExAPI
-# http://peterdowns.com/posts/first-time-with-pypi.html
-# https://www.reddit.com/r/Python/comments/46gpcb/how_do_i_submit_a_package_to_pypi_automatically/
