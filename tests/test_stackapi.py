@@ -8,16 +8,18 @@ from mock import patch
 from stackapi import StackAPI
 from stackapi import StackAPIError
 
+TESTS_DIRECTORY = "tests"
+directory = "tests/" if TESTS_DIRECTORY not in os.getcwd() else ""
 
 def fake_stackoverflow_exists(self, endpoint=None, page=1, key=None, filter='default', **kwargs):
-    response_file = os.path.normpath('mock_objects/test_stackoverflow_exists')
+    response_file = os.path.normpath('{}mock_objects/test_stackoverflow_exists'.format(directory))
     with open(response_file) as json_file:
         j_data = json.load(json_file)
     return j_data
 
 
 def fake_users(self, endpoint=None, page=1, key=None, filter='default', **kwargs):
-    response_file = os.path.normpath('mock_objects/test_users_associated')
+    response_file = os.path.normpath('{}mock_objects/test_users_associated'.format(directory))
     with open(response_file) as json_file:
         j_data = json.load(json_file)
     return j_data
