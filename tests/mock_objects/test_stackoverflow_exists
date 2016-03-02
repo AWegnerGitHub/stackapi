@@ -1,0 +1,183 @@
+{
+  "items": [
+    {
+      "aliases": [
+        "http://www.stackoverflow.com",
+        "http://facebook.stackoverflow.com"
+      ],
+      "styling": {
+        "tag_background_color": "#E0EAF1",
+        "tag_foreground_color": "#3E6D8E",
+        "link_color": "#0077CC"
+      },
+      "related_sites": [
+        {
+          "relation": "meta",
+          "api_site_parameter": "meta.stackoverflow",
+          "site_url": "http://meta.stackoverflow.com",
+          "name": "Meta Stack Overflow"
+        },
+        {
+          "relation": "chat",
+          "site_url": "http://chat.stackoverflow.com",
+          "name": "Stack Overflow Chat"
+        }
+      ],
+      "markdown_extensions": [
+        "Prettify"
+      ],
+      "launch_date": 1221436800,
+      "closed_beta_date": 1217462400,
+      "site_state": "normal",
+      "high_resolution_icon_url": "http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon@2.png",
+      "favicon_url": "http://cdn.sstatic.net/stackoverflow/img/favicon.ico",
+      "icon_url": "http://cdn.sstatic.net/stackoverflow/img/apple-touch-icon.png",
+      "audience": "professional and enthusiast programmers",
+      "site_url": "http://stackoverflow.com",
+      "api_site_parameter": "stackoverflow",
+      "logo_url": "http://cdn.sstatic.net/stackoverflow/img/logo.png",
+      "name": "Stack Overflow",
+      "site_type": "main_site"
+    },
+    {
+      "styling": {
+        "tag_background_color": "#F3F1D9",
+        "tag_foreground_color": "#444444",
+        "link_color": "#10456A"
+      },
+      "related_sites": [
+        {
+          "relation": "meta",
+          "api_site_parameter": "meta.serverfault",
+          "site_url": "http://meta.serverfault.com",
+          "name": "Meta Server Fault"
+        },
+        {
+          "relation": "chat",
+          "site_url": "http://chat.stackexchange.com?tab=site&host=serverfault.com",
+          "name": "Chat Stack Exchange"
+        }
+      ],
+      "markdown_extensions": [
+        "Prettify"
+      ],
+      "launch_date": 1243296000,
+      "closed_beta_date": 1241049600,
+      "site_state": "normal",
+      "high_resolution_icon_url": "http://cdn.sstatic.net/serverfault/img/apple-touch-icon@2.png",
+      "twitter_account": "ServerFault",
+      "favicon_url": "http://cdn.sstatic.net/serverfault/img/favicon.ico",
+      "icon_url": "http://cdn.sstatic.net/serverfault/img/apple-touch-icon.png",
+      "audience": "system and network administrators",
+      "site_url": "http://serverfault.com",
+      "api_site_parameter": "serverfault",
+      "logo_url": "http://cdn.sstatic.net/serverfault/img/logo.png",
+      "name": "Server Fault",
+      "site_type": "main_site"
+    },
+    {
+      "styling": {
+        "tag_background_color": "#FFFFFF",
+        "tag_foreground_color": "#1087A4",
+        "link_color": "#1086A4"
+      },
+      "related_sites": [
+        {
+          "relation": "meta",
+          "api_site_parameter": "meta.superuser",
+          "site_url": "http://meta.superuser.com",
+          "name": "Meta Super User"
+        },
+        {
+          "relation": "chat",
+          "site_url": "http://chat.stackexchange.com?tab=site&host=superuser.com",
+          "name": "Chat Stack Exchange"
+        }
+      ],
+      "markdown_extensions": [
+        "Prettify"
+      ],
+      "launch_date": 1250553600,
+      "closed_beta_date": 1247529600,
+      "site_state": "normal",
+      "high_resolution_icon_url": "http://cdn.sstatic.net/superuser/img/apple-touch-icon@2.png",
+      "twitter_account": "super_user",
+      "favicon_url": "http://cdn.sstatic.net/superuser/img/favicon.ico",
+      "icon_url": "http://cdn.sstatic.net/superuser/img/apple-touch-icon.png",
+      "audience": "computer enthusiasts and power users",
+      "site_url": "http://superuser.com",
+      "api_site_parameter": "superuser",
+      "logo_url": "http://cdn.sstatic.net/superuser/img/logo.png",
+      "name": "Super User",
+      "site_type": "main_site"
+    },
+    {
+      "styling": {
+        "tag_background_color": "#F7FDFF",
+        "tag_foreground_color": "#566E76",
+        "link_color": "#4E82C2"
+      },
+      "related_sites": [
+        {
+          "relation": "chat",
+          "site_url": "http://chat.meta.stackexchange.com",
+          "name": "Meta Stack Exchange Chat"
+        }
+      ],
+      "markdown_extensions": [
+        "Prettify"
+      ],
+      "launch_date": 1246147200,
+      "site_state": "normal",
+      "high_resolution_icon_url": "http://cdn.sstatic.net/stackexchangemeta/img/apple-touch-icon@2.png",
+      "favicon_url": "http://cdn.sstatic.net/stackexchangemeta/img/favicon.ico",
+      "icon_url": "http://cdn.sstatic.net/stackexchangemeta/img/apple-touch-icon.png",
+      "audience": "meta-discussion of the Stack Exchange family of Q&amp;A websites",
+      "site_url": "http://meta.stackexchange.com",
+      "api_site_parameter": "meta",
+      "logo_url": "http://cdn.sstatic.net/stackexchangemeta/img/logo.png",
+      "name": "Meta Stack Exchange",
+      "site_type": "main_site"
+    },
+    {
+      "aliases": [
+        "http://nothingtoinstall.com"
+      ],
+      "styling": {
+        "tag_background_color": "#E2EDFA",
+        "tag_foreground_color": "#5D7A9C",
+        "link_color": "#426389"
+      },
+      "related_sites": [
+        {
+          "relation": "meta",
+          "api_site_parameter": "meta.webapps",
+          "site_url": "http://meta.webapps.stackexchange.com",
+          "name": "Web Applications Meta Stack Exchange"
+        },
+        {
+          "relation": "chat",
+          "site_url": "http://chat.stackexchange.com?tab=site&host=webapps.stackexchange.com",
+          "name": "Chat Stack Exchange"
+        }
+      ],
+      "launch_date": 1285804800,
+      "open_beta_date": 1278460800,
+      "closed_beta_date": 1277856000,
+      "site_state": "normal",
+      "high_resolution_icon_url": "http://cdn.sstatic.net/webapps/img/apple-touch-icon@2.png",
+      "twitter_account": "StackWebApps",
+      "favicon_url": "http://cdn.sstatic.net/webapps/img/favicon.ico",
+      "icon_url": "http://cdn.sstatic.net/webapps/img/apple-touch-icon.png",
+      "audience": "power users of web applications",
+      "site_url": "http://webapps.stackexchange.com",
+      "api_site_parameter": "webapps",
+      "logo_url": "http://cdn.sstatic.net/webapps/img/logo.png",
+      "name": "Web Applications",
+      "site_type": "main_site"
+    }
+  ],
+  "has_more": false,
+  "quota_max": 10000,
+  "quota_remaining": 9997
+}

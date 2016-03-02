@@ -16,6 +16,7 @@ setup(
     packages=find_packages(exclude=['contrib', 'docs', 'tests*', 'test']),
     version='0.1.6',
     install_requires=['requests'],
+    tests_require=['mock'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',

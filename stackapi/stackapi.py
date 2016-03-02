@@ -154,7 +154,7 @@ class StackAPI(object):
             raise ValueError('No end point provided.')
 
         self._endpoint = endpoint
-            
+
         params = {
             "pagesize": self.page_size,
             "page": page,

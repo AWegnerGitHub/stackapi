@@ -1,44 +1,60 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-This testing package makes anonymous API calls the Stack Exchange API. As a result, if you are receiving
-`StackAPIError` exceptions on a majority of these, you have exceeded your anonymous calls to the API for the
-day.
-
-This will be corrected, by mocking the responses, at some point in the future.
-"""
-
+import json
+import os.path
 import unittest
-from stackapi import StackAPI, StackAPIError
+from mock import patch
+from stackapi import StackAPI
+from stackapi import StackAPIError
+
+
+def fake_stackoverflow_exists(self, endpoint=None, page=1, key=None, filter='default', **kwargs):
+    response_file = os.path.normpath('mock_objects/test_stackoverflow_exists')
+    with open(response_file) as json_file:
+        j_data = json.load(json_file)
+    return j_data
+
+
+def fake_users(self, endpoint=None, page=1, key=None, filter='default', **kwargs):
+    response_file = os.path.normpath('mock_objects/test_users_associated')
+    with open(response_file) as json_file:
+        j_data = json.load(json_file)
+    return j_data
 
 
 class Test_StackAPI(unittest.TestCase):
+    def test_no_site_provided(self):
+        """Testing that it raises the correct error when no site is provided"""
+        with self.assertRaises(ValueError) as cm:
+            site = StackAPI()
+            self.assertEqual('No Site Name provided', str(cm.exception))
+
+    @patch('stackapi.StackAPI.fetch', fake_stackoverflow_exists)
     def test_stackoverflow_exists(self):
         """Simply testing the object is created correctly"""
         self.assertEqual(StackAPI('stackoverflow')._name, "Stack Overflow")
 
+    @patch('stackapi.StackAPI.fetch', fake_stackoverflow_exists)
     def test_asdfghjkl_not_exist(self):
         """Testing that it raises the correct error on unknown site"""
         with self.assertRaises(ValueError) as cm:
-            StackAPI('asdfghjkl')
+            site = StackAPI('asdfghjkl')
             self.assertEqual('Invalid Site Name provided', str(cm.exception))
-
-    def test_no_site_provided(self):
-        """Testing that it raises the correct error when no site is provided"""
-        with self.assertRaises(ValueError) as cm:
-            StackAPI()
-            self.assertEqual('No Site Name provided', str(cm.exception))
 
     def test_nonsite_parameter(self):
         """Testing that it can retrieve data on end points that don't want
         the `site` parameter. Tested using Jeff Atwood's user id"""
-        site = StackAPI('stackoverflow')
+        with patch('stackapi.StackAPI.fetch', fake_stackoverflow_exists) as mock_site:
+            site = StackAPI('stackoverflow')
         site._api_key = None
-        self.assertGreaterEqual(len(site.fetch('/users/1/associated')['items']), 1)
+        with patch('stackapi.StackAPI.fetch', fake_users) as mock_users:
+            self.assertGreaterEqual(len(site.fetch('/users/1/associated')['items']), 1)
 
     def test_exceptions_thrown(self):
-        """Testing that a StackAPIError is properly thrown"""
+        """Testing that a StackAPIError is properly thrown
+
+        This test hits the real API."""
         with self.assertRaises(StackAPIError) as cm:
             site = StackAPI('stackoverflow')
             site._api_key = None
