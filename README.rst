@@ -2,6 +2,9 @@ This is a Python wrappers for the `Stack Exchange
 API <http://api.stackexchange.com/>`__. This library supports Stack
 Exchange API v2.2.
 
+.. image:: https://travis-ci.org/AWegnerGitHub/stackapi.svg?branch=master
+  :target: https://travis-ci.org/AWegnerGitHub/stackapi
+
 This library has support for:
 
 -  The Stack Exchange backoff parameter. It will automatically force a
