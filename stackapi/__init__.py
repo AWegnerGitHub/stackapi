@@ -1,2 +1,2 @@
-from stackapi import StackAPI
-from stackapi import StackAPIError
+from .stackapi import StackAPI
+from .stackapi import StackAPIError
