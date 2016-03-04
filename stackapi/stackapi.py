@@ -15,17 +15,10 @@ class StackAPIError(Exception):
     This utilizes the values returned by the API and described
     here: http://api.stackexchange.com/docs/types/error
     
-    Parameters
-    ----------
-    
-        url : string
-            The URL that was called and generated an error
-        error : int
-            The `error_id` returned by the API (should be an int)
-        code : string
-            The `description` returned by the API and is human friendly
-        message : string
-            The `error_name` returned by the API
+    :param url: (string) The URL that was called and generated an error
+    :param error: (int) The `error_id` returned by the API (should be an int)
+    :param code: (string) The `description` returned by the API and is human friendly
+    :param message: (string) The `error_name` returned by the API
     """
 
     def __init__(self, url, error, code, message):
@@ -40,29 +33,27 @@ class StackAPI(object):
         """
         The object used to interact with the Stack Exchange API
         
-        Attributes
-        ----------
-        
-        name : string
-            (Required): A valid `api_site_parameter` 
-            (avaiable from http://api.stackexchange.com/docs/sites) which will
+        :param name: (string) **(Required)** A valid ``api_site_parameter``
+            (available from http://api.stackexchange.com/docs/sites) which will
             be used to connect to a particular site on the Stack Exchange
             Network.
-        version : float
-            (Required) The version of the API you are connecting to. The 
-            default of 2.2 is the current version
-        kwargs : {proxy, max_pages, page_size, key, access_token}
-            proxy - A dictionary of http and https proxy locations
-                Example: {'http': 'http://example.com', 
-                          'https': 'https:example.com'}
-                By default, this is `None`.
-            max_pages - The maximium number of pages to retreive (Default: 100)
-            page_size - The number of elements per page. The API limits this to
-                a maximum of 100 items on all end points except `site`
-            key - An API key 
-            access_token - An access token associated with an application and 
-                a user, to grant more permissions (such as write access)
-   
+        :param version: (float) **(Required)** The version of the API you are connecting to.
+            The default of ``2.2`` is the current version
+        :param proxy: (dict) (optional) A dictionary of http and https proxy locations
+            Example:
+
+            .. code-block:: python
+
+                {'http': 'http://example.com',
+                 'https': 'https://example.com'}
+
+            By default, this is ``None``.
+        :param max_pages: (int) (optional) The maximum number of pages to retrieve (Default: ``100``)
+        :param page_size: (int) (optional) The number of elements per page. The API limits this to
+            a maximum of 100 items on all end points except ``site``
+        :param key: (string) (optional) An API key
+        :param access_token: (string) (optional) An access token associated with an application and
+            a user, to grant more permissions (such as write access)
         """
         if not name:
             raise ValueError('No Site Name provided')
@@ -106,49 +97,37 @@ class StackAPI(object):
         
         Returned data will appear in the `items` key of the resulting 
         dictionary.
-        
-        Parameters
-        ----------
-        
-        endpoint : string
-            The API end point being called. Available endpoints are listed on 
+
+        :param endpoint: (string) The API end point being called. Available endpoints are listed on
             the official API documentation: http://api.stackexchange.com/docs
             
-            This can be as simple as `fetch('answers')`, to call the answers 
+            This can be as simple as ``fetch('answers')``, to call the answers
             end point
             
             If calling an end point that takes additional parameter, such as `id`s
             pass the ids as a list to the `ids` key: 
-                
-                `fetch('answers/{}', ids=[1,2,3])`
+
+                .. code-block:: python
+
+                    fetch('answers/{}', ids=[1,2,3])
                 
             This will attempt to retrieve the answers for the three listed ids.
             
-            If no end point is passed, a `ValueError` will be raised
-        page : int
-            The page in the results to start at. By default, it will start on
+            If no end point is passed, a ``ValueError`` will be raised
+        :param page: (int) The page in the results to start at. By default, it will start on
             the first page and automatically paginate until the result set
-            reached `max_pages`.
-        key : string
-            The site you are issuing queries to. 
-        filter : string
-            The filter to utilize when calling an endpoint. Different filters
-            will return different keys. The default is `default` and this will
+            reached ``max_pages``.
+        :param key: (string) The site you are issuing queries to.
+        :param filter: (string) The filter to utilize when calling an endpoint. Different filters
+            will return different keys. The default is ``default`` and this will
             still vary depending on what the API returns as default for a 
             particular endpoint
-        kwargs :
-            Parameters accepted by individual endpoints. These parameters 
-            *must* be named the same as described in the endpoint documentation
-            
-        Returns
-        -------
-        
-        result : dictionary
-            A dictionary containing wrapper data regarding the API call
+        :param kwargs: Parameters accepted by individual endpoints. These parameters
+            **must** be named the same as described in the endpoint documentation
+        :rtype: (dictionary) A dictionary containing wrapper data regarding the API call
             and the results of the call in the `items` key. If multiple
-            pages were retreived, all of the results will appear in the
-            `items` tag.
-        
+            pages were received, all of the results will appear in the
+            ``items`` tag.
         """
         if not endpoint:
             raise ValueError('No end point provided.')
@@ -244,57 +223,45 @@ class StackAPI(object):
     def send_data(self, endpoint=None, page=1, key=None, filter='default', **kwargs):
         """Sends data to the API.
         
-        This call is similar to `fetch`, but *sends* data to the API instead 
+        This call is similar to ``fetch``, but **sends** data to the API instead
         of retrieving it. 
                 
-        Returned data will appear in the `items` key of the resulting 
+        Returned data will appear in the ``items`` key of the resulting
         dictionary.
         
-        Sending data requires that the `access_token` is set. This is enforced
+        Sending data **requires** that the ``access_token`` is set. This is enforced
         on the API side, not within this library.
         
-        Parameters
-        ----------
-        
-        endpoint : string
-            The API end point being called. Available endpoints are listed on 
+        :param endpoint: (string) The API end point being called. Available endpoints are listed on
             the official API documentation: http://api.stackexchange.com/docs
-            
-            This can be as simple as `fetch('answers')`, to call the answers 
+
+            This can be as simple as ``fetch('answers')``, to call the answers
             end point
-            
+
             If calling an end point that takes additional parameter, such as `id`s
-            pass the ids as a list to the `ids` key: 
-                
-                `fetch('answers/{}', ids=[1,2,3])`
-                
+            pass the ids as a list to the `ids` key:
+
+                .. code-block:: python
+
+                    fetch('answers/{}', ids=[1,2,3])
+
             This will attempt to retrieve the answers for the three listed ids.
-            
-            If no end point is passed, a `ValueError` will be raised
-        page : int
-            The page in the results to start at. By default, it will start on
+
+            If no end point is passed, a ``ValueError`` will be raised
+        :param page: (int) The page in the results to start at. By default, it will start on
             the first page and automatically paginate until the result set
-            reached `max_pages`.
-        key : string
-            An API key
-        filter : string
-            The filter to utilize when calling an endpoint. Different filters
-            will return different keys. The default is `default` and this will
-            still vary depending on what the API returns as default for a 
+            reached ``max_pages``.
+        :param key: (string) The site you are issuing queries to.
+        :param filter: (string) The filter to utilize when calling an endpoint. Different filters
+            will return different keys. The default is ``default`` and this will
+            still vary depending on what the API returns as default for a
             particular endpoint
-        kwargs :
-            Parameters accepted by individual endpoints. These parameters 
-            *must* be named the same as described in the endpoint documentation
-            
-        Returns
-        -------
-        
-        result : dictionary
-            A dictionary containing wrapper data regarding the API call
+        :param kwargs: Parameters accepted by individual endpoints. These parameters
+            **must** be named the same as described in the endpoint documentation
+        :rtype: (dictionary) A dictionary containing wrapper data regarding the API call
             and the results of the call in the `items` key. If multiple
-            pages were retreived, all of the results will appear in the
-            `items` tag.
-        
+            pages were received, all of the results will appear in the
+            ``items`` tag.
         """
         if not endpoint:
             raise ValueError('No end point provided.')
