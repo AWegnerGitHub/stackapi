@@ -44,10 +44,7 @@ library, and provides advanced examples of various use cases.
    
    user/intro
    user/install
-   user/quickstart
-   user/advanced
-   user/othertasks
-   
+
 The API Documentation
 ---------------------
 
