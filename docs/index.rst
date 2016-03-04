@@ -23,8 +23,7 @@ The above, will issue a call to the
 Supported Features
 ------------------
 
--  The Stack Exchange ``backoff`` parameter. It will automatically force a
-   delay to match the parameter.
+-  Automatically obeys the ``backoff`` parameter. 
 -  Read and write functionality via the API.
 -  Retrieve multiple pages of results with a single call and merge
    all the results into a single response.
