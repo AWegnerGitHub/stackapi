@@ -23,7 +23,7 @@ The above, will issue a call to the
 Supported Features
 ------------------
 
--  Automatically obeys the ``backoff`` parameter. 
+-  Automatically obeys the ``backoff`` parameter.
 -  Read and write functionality via the API.
 -  Retrieve multiple pages of results with a single call and merge
    all the results into a single response.
@@ -43,6 +43,8 @@ library, and provides advanced examples of various use cases.
    
    user/intro
    user/install
+   user/quickstart
+   user/advanced
 
 The API Documentation
 ---------------------
