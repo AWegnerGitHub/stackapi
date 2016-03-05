@@ -4,6 +4,11 @@ Exchange API v2.2.
 
 .. image:: https://travis-ci.org/AWegnerGitHub/stackapi.svg?branch=master
   :target: https://travis-ci.org/AWegnerGitHub/stackapi
+  :alt: Build Status
+
+.. image:: https://readthedocs.org/projects/stackapi/badge/?version=latest
+  :target: http://stackapi.readthedocs.org/en/latest/?badge=latest
+  :alt: Documentation Status
 
 This library has support for:
 
@@ -15,8 +20,11 @@ This library has support for:
 -  Throws exceptions returned by the API for easier troubleshooting.
 -  Utilizes `Requests <http://docs.python-requests.org/>`__.
 
-Example usage patterns:
-=======================
+Must more detailed documentation is available on
+`ReadTheDocs <http://stackapi.readthedocs.org/>`__.
+
+Example usage:
+==============
 
 Establish a connection to Stack Overflow and gather some comments
 -----------------------------------------------------------------
