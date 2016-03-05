@@ -32,6 +32,14 @@ class Test_StackAPI(unittest.TestCase):
             site = StackAPI()
             self.assertEqual('No Site Name provided', str(cm.exception))
 
+    def test_no_endpoint_provided(self):
+        """Testing that it raises the correct error when no endpoint is provided"""
+        with self.assertRaises(ValueError) as cm:
+            with patch('stackapi.StackAPI.fetch', fake_stackoverflow_exists) as mock_site:
+                site = StackAPI('stackoverflow')
+            site.fetch()
+            self.assertEqual('No end point provided.', str(cm.exception))
+
     @patch('stackapi.StackAPI.fetch', fake_stackoverflow_exists)
     def test_stackoverflow_exists(self):
         """Simply testing the object is created correctly"""
