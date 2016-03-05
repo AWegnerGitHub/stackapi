@@ -70,7 +70,7 @@ class StackAPI(object):
         self._previous_call = None
 
         self._base_url = 'https://api.stackexchange.com/{}/'.format(version)
-        sites = self.fetch('sites', filter='!*L1*AY-85YllAr2)')
+        sites = self.fetch('sites', filter='!*L1*AY-85YllAr2)', pagesize=1000)
         for s in sites['items']:
             if name == s['api_site_parameter']:
                 self._name = s['name']
