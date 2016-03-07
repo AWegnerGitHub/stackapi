@@ -21,7 +21,7 @@ Retrieving data is very simple.
 
 First, import the StackAPI module::
 
-    >>> import stackapi
+    >>> from stackapi import StackAPI
 
 Now we want to retrieve the most recent comments from Stack Overflow::
 
@@ -32,6 +32,9 @@ This will return the 500 most recent comments on Stack Overflow, using the
 default filter the API provides. The value passed to
 :meth:`fetch <stackapi.StackAPI.fetch>` is an end point defined in the
 `Stack Exchange API <http://api.stackexchange.com/>`__.
+
+If you are looking for more information on how to tailor the results of your
+queries. Take a look at the :ref:`Advanced Usage <advanced>` examples.
 
 .. _change-num-results:
 

@@ -8,6 +8,128 @@ Advanced Usage
 This portion of the documentation covers some of the more advanced features of
 StackAPI.
 
+.. _more-parameters-fetch:
+
+Calling ``fetch`` with various API parameters
+---------------------------------------------
+
+The various `end points <http://api.stackexchange.com/>`__ all take multiple
+parameters to help filter the number of results you return. StackAPI will
+accept all of these parameters.
+
+As an example, let's look at the `comments <http://api.stackexchange.com/docs/comments>`__
+end point. This end point will accept the following parameters:
+
+- page
+- pagesize
+- fromdate
+- todate
+- order
+- min
+- max
+- sort
+
+``page`` and ``pagesize`` are handled by StackAPI through usage of the
+``max_pages`` and ``page_size`` values of the :class:`StackAPI <stackapi.StackAPI>`
+class. The others, are part of the ``kwargs`` accepted by
+:meth:`fetch <stackapi.StackAPI.fetch>`.
+
+Let's create an example using several of these parameters. This should return
+a list of questions created between March 5, 2016 and March 6, 2016 that have
+a score of at least 20 and are tagged ``python``::
+
+    >>> from stackapi import StackAPI
+    >>> SITE = StackAPI('stackoverflow')
+    >>> questions = SITE.fetch('questions', fromdate=1457136000, todate=1457222400,
+        min=20, tagged='python', sort='votes')
+    >>> questions
+    {
+        'backoff': 0,
+        'has_more': False,
+        'items': [
+                    {
+                        u'accepted_answer_id': 35818398,
+                        u'answer_count': 2,
+                        u'creation_date': 1457186774,
+                        u'is_answered': True,
+                        u'last_activity_date': 1457246584,
+                        u'last_edit_date': 1457200889,
+                        u'link': u'http://stackoverflow.com/questions/35815093/sine-calculation-orders-of-magnitude-slower-than-cosine',
+                        u'owner': {u'accept_rate': 80,
+                                   u'display_name': u'Finwood',
+                                   u'link': u'http://stackoverflow.com/users/1525423/finwood',
+                                   u'profile_image': u'https://i.stack.imgur.com/xkRry.png?s=128&g=1',
+                                   u'reputation': 1575,
+                                   u'user_id': 1525423,
+                                   u'user_type': u'registered'},
+                        u'question_id': 35815093,
+                        u'score': 22,
+                        u'tags': [u'python', u'numpy', u'scipy', u'signal-processing'],
+                        u'title': u'sine calculation orders of magnitude slower than cosine',
+                        u'view_count': 404
+                    }
+                 ],
+        'page': 1,
+        'quota_max': 300,
+        'quota_remaining': 171,
+        'total': 0
+    }
+
+We can see that a single question matched our criteria.
+
+**Note**: StackAPI does not do any data transformation for these end point
+parameters. This means that ``fromdate`` needs to be passed the integer
+values that the API Documentation describes, not a datetime object. These are
+Unix timestamps/epoch values.
+
+.. _query-ids:
+
+Calling ``fetch`` for specific IDs
+----------------------------------
+
+Some of the end points accept IDs. The documentation says these are semicolon
+delimited lists of values. StackAPI, however, can handle this for you. You
+just need to pass a ``list`` to the ``ids`` keyword argument::
+
+    >>> from stackapi import StackAPI
+    >>> SITE = StackAPI('stackoverflow')
+    >>> badges = SITE.fetch('badges', ids=[222, 1306, 99999])
+    >>> badges
+    {
+        'backoff': 0,
+        'has_more': False,
+        'items': [
+                    {
+                        u'award_count': 6036,
+                        u'badge_id': 222,
+                        u'badge_type': u'named',
+                        u'link': u'http://stackoverflow.com/badges/222/altruist',
+                        u'name': u'Altruist',
+                        u'rank': u'bronze'
+                    },
+                    {
+                        u'award_count': 43954,
+                        u'badge_id': 1306,
+                        u'badge_type': u'named',
+                        u'link': u'http://stackoverflow.com/badges/1306/analytical',
+                        u'name': u'Analytical',
+                        u'rank': u'bronze'
+                    }
+                ],
+        'page': 1,
+        'quota_max': 300,
+        'quota_remaining': 160,
+        'total': 0
+    }
+
+Notice that we searched for 3 badges and only 2 results were returned. This is
+how the API operates. If an ID doesn't exist, a result will not be returned or
+indicated that it has been missed. It may be important for you to compare
+results to what you searched for to see if any values are missing.
+
+
+.. _proxy-usage:
+
 Proxy Usage
 -----------
 
@@ -41,6 +163,8 @@ when creating the :class:`StackAPI <stackapi.StackAPI>` class::
 The two important lines are where ``proxies`` is defined and the
 modified :class:`StackAPI <stackapi.StackAPI>` initialization, which passes the
 ``proxies`` dictionary to the ``proxy`` argument.
+
+.. _unwanted-parameter:
 
 End points that don't accept ``site`` parameter
 -----------------------------------------------
@@ -81,4 +205,3 @@ The solution is to clear the ``_api_key``.
         "quota_max": 10000,
         "quota_remaining": 9989
     }
-
