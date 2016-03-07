@@ -54,7 +54,8 @@ end points. In this case, you'll receive a
 
 The solution is to clear the ``_api_key``.
 
-    >>> SITE = StackAPI('stackoverflow')
+    >>> from stackapi import StackAPI
+	>>> SITE = StackAPI('stackoverflow')
     >>> SITE._api_key = None
     >>> associated_users = SITE.fetch('/users/{}/associated'.format(63984), pagesize=1)
     >>> associated_users
@@ -82,3 +83,38 @@ The solution is to clear the ``_api_key``.
         "quota_remaining": 9989
     }
 
+Send data via the API
+---------------------
+
+StackAPI can send data to a Stack Exchange site, provided you have an 
+application registered on `StackApps <http://stackapps.com/apps/oauth/register>`
+and registered a token with `write <http://api.stackexchange.com/docs/write>` 
+access. 
+
+The following example assumes that you have a registered application and
+registered a user against that application. The ``key`` value is provided
+on the `Stack Apps App Management page <http://stackapps.com/apps/oauth/>`. 
+The token is provided when a user authorizes the application to act on their
+behalf. StackAPI does not perform or support this authorization. Stack Exchange
+provides three methods for performing this 
+`authorization <http://api.stackexchange.com/docs/authentication>`.
+
+**Reminder**: The ``access_token`` is *per user*. It is associated with a 
+single user. If StackAPI is acting on behalf of multiple users, the token
+**must** be changed each time ``send_data`` is utilized.
+
+	>>> from stackapi import StackAPI
+	>>> SITE = SEAPI.SEAPI('stackoverflow', key=APP_KEY, access_token=ACCESS_TOKEN)
+	>>> flag = SITE.send_data('comments/123/flags/add', option_id=option_id)
+
+This block will flag comment ``123`` with the value of ``option_id``. 
+This value can be found by checking which options are valid for the flag.
+
+    >>> flag_options = SITE.fetch('comments/123/flags/options')
+	
+Assuming that comment ``123`` is valid, 
+`this call <https://api.stackexchange.com/docs/comment-flag-options>`
+will return a list of valid flags. From here, you select the ``option_id``
+that matches the reason you want to flag. When you pass that via ``send_data``
+in the ``option_id`` flag, StackAPI will issue a flag on behalf of the user
+associated with the provided ``access_token``.
