@@ -15,7 +15,7 @@ Retrieving data from the API is simple:
     comments = SITE.fetch('comments')
 
 The above, will issue a call to the
-|comments|_. end point on Stack Overflow and retrieve the 500 newest comments.
+|comments|_ end point on Stack Overflow and retrieve the 500 newest comments.
 
 .. |comments| replace:: ``comments``
 .. _comments: http://api.stackexchange.com/docs/comments
