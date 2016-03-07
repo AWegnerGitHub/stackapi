@@ -1,11 +1,7 @@
 import requests
 from itertools import chain
 from time import sleep
-
-try:
-    import json
-except ImportError:
-    import simplejson as json
+import json
 
 
 class StackAPIError(Exception):
