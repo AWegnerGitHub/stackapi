@@ -40,4 +40,4 @@ The above, will issue a call to the
 .. _comments: http://api.stackexchange.com/docs/comments
 
 Much more detailed documentation is available on
-`StackAPI's ReadTheDocs page<http://stackapi.readthedocs.org/>`__.
+`ReadTheDocs <http://stackapi.readthedocs.org/>`__.
