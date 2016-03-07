@@ -206,6 +206,8 @@ The solution is to clear the ``_api_key``.
         "quota_max": 10000,
         "quota_remaining": 9989
     }
+	
+.. _send-data:
 
 Send data via the API
 ---------------------
