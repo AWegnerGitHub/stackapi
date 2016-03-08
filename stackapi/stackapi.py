@@ -2,6 +2,8 @@ import requests
 from itertools import chain
 from time import sleep
 import json
+import datetime
+import calendar
 
 
 class StackAPIError(Exception):
@@ -145,6 +147,13 @@ class StackAPI(object):
         if 'ids' in kwargs:
             ids = ';'.join(str(x) for x in kwargs['ids'])
             kwargs.pop('ids', None)
+            
+        date_time_keys = ['fromdate', 'todate', 'since', 'min', 'max']
+        for k in date_time_keys:
+            if k in kwargs:
+                if isinstance(kwargs[k], datetime.datetime):
+                    kwargs[k] = int(calendar.timegm(kwargs[k].utctimetuple()))
+                    
 
         params.update(kwargs)
         if self._api_key:

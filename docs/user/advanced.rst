@@ -77,10 +77,21 @@ a score of at least 20 and are tagged ``python``::
 
 We can see that a single question matched our criteria.
 
-**Note**: StackAPI does not do any data transformation for these end point
-parameters. This means that ``fromdate`` needs to be passed the integer
-values that the API Documentation describes, not a datetime object. These are
-Unix timestamps/epoch values.
+**Note**: In the above example, we passed a timestamp value to the ``fromdate`
+and ``todate`` parameters. StackAPI will also allow you to pass in 
+``datetime`` objects and automatically perform this conversion for you.
+
+StackAPI will perform this conversion to the following parameters:
+
+- fromdate
+- todate
+- since
+- min
+- max
+
+The ``min`` and ``max`` parameters are not exclusively date fields in the API.
+StackAPI will only convert these to timestamps if a ``datetime`` object is 
+passed.
 
 .. _query-ids:
 
