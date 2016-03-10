@@ -55,8 +55,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'StackAPI'
-copyright = u'2016, Andrew Wegner'
-author = u'Andrew Wegner'
+copyright = u'2016, Andrew Wegner and contributors'
+author = u'Andrew Wegner and contributors'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
