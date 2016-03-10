@@ -54,14 +54,9 @@ Any favorites added in the month of December 2011 by Darin Dimitrov
 
 	>>> SITE = StackAPI('stackoverflow')
 	>>> from datetime import datetime
-	>>> favorites = SITE.fetch('users/29407/favorites', min=datetime(2011, 12, 1), max=datetime(2012, 1, 1), sort='added')
+	>>> favorites = SITE.fetch('users/{ids}/favorites', min=datetime(2011, 12, 1), max=datetime(2012, 1, 1), sort='added', ids=[29407])
 	>>> len(favorites['items'])
 	9
-
-**Note** Until `Issue 18 <https://github.com/AWegnerGitHub/stackapi/issues/18>`__ 
-has been resolved, the user id needs to be part of the end point, not a passed
-parameter. This note will be removed, and the example updated, when the issue 
-is resolved.
 
 Questions created during the Modern Warfare 3 VS Skyrim Contest with the ``skryim`` tag and a score greater than 10 on Gaming Stack Exchange
 --------------------------------------------------------------------------------------------------------------------------------------------

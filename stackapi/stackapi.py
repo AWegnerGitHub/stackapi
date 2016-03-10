@@ -143,17 +143,28 @@ class StackAPI(object):
         if self.access_token:
             params['access_token'] = self.access_token
 
-        ids = None
-        if 'ids' in kwargs:
-            ids = ';'.join(str(x) for x in kwargs['ids'])
-            kwargs.pop('ids', None)
+        # This block will replace {ids} placeholds in end points
+        # converting .fetch('badges/{ids}', ids=[222, 1306, 99999]) to
+        #   badges/222;1306;99999
+        for k, value in kwargs.items():
+            if "{" + k + "}" in endpoint:
+                endpoint = endpoint.replace("{"+k+"}", ';'.join(str(x) for x in value))
+                kwargs.pop(k, None)
             
         date_time_keys = ['fromdate', 'todate', 'since', 'min', 'max']
         for k in date_time_keys:
             if k in kwargs:
                 if isinstance(kwargs[k], datetime.datetime):
                     kwargs[k] = int(calendar.timegm(kwargs[k].utctimetuple()))
-                    
+
+        # This block will see if there there are ids remaining
+        # This would occur if the developer passed `badges` instead of `badges/{ids}` to `fetch`
+        # If this is the case, then convert to a string and assume this goes at the end of the endpoint
+
+        if 'ids' in kwargs:
+            ids = ';'.join(str(x) for x in kwargs['ids'])
+            kwargs.pop('ids', None)
+            endpoint += "/{}".format(ids)
 
         params.update(kwargs)
         if self._api_key:
@@ -167,8 +178,6 @@ class StackAPI(object):
             run_cnt += 1
 
             base_url = "{}{}/".format(self._base_url, endpoint)
-            if ids:
-                base_url += "{}".format(ids)
 
             try:
                 response = requests.get(base_url, params=params, proxies=self.proxy)

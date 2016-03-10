@@ -138,6 +138,23 @@ how the API operates. If an ID doesn't exist, a result will not be returned or
 indicated that it has been missed. It may be important for you to compare
 results to what you searched for to see if any values are missing.
 
+Another thing to notice here is that only ``badges`` was passed as the end
+point. This works because the official end point is ``badges/{ids}``. If you
+leave the ``{ids}`` off and it is the last part of the end point, StackAPI will
+automatically add it for you. An identical call would look like this, with
+``{ids}`` included in the end point declaration.
+
+    >>> badges = SITE.fetch('badges/{ids}', ids=[222, 1306, 99999])
+
+If ``{ids}`` is not at the end of the end point, then leaving it out of the
+target end point is **not** optional. This will **not work**::
+
+    >>> answers = SITE.fetch('/answers/comments', ids=[1, 2, 3])
+
+However, this will work and will return comments associated with the selected
+answers::
+
+    >>> answers = SITE.fetch('/answers/{ids}/comments', ids=[1, 2, 3])
 
 .. _proxy-usage:
 
