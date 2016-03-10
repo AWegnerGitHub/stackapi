@@ -224,17 +224,17 @@ Send data via the API
 ---------------------
 
 StackAPI can send data to a Stack Exchange site, provided you have an 
-application registered on `StackApps <http://stackapps.com/apps/oauth/register>`
-and registered a token with `write <http://api.stackexchange.com/docs/write>` 
+application registered on `StackApps <http://stackapps.com/apps/oauth/register>`__
+and registered a token with `write <http://api.stackexchange.com/docs/write>`__ 
 access. 
 
 The following example assumes that you have a registered application and
 registered a user against that application. The ``key`` value is provided
-on the `Stack Apps App Management page <http://stackapps.com/apps/oauth/>`. 
+on the `Stack Apps App Management page <http://stackapps.com/apps/oauth/>`__. 
 The token is provided when a user authorizes the application to act on their
 behalf. StackAPI does not perform or support this authorization. Stack Exchange
 provides three methods for performing this 
-`authorization <http://api.stackexchange.com/docs/authentication>`.
+`authorization <http://api.stackexchange.com/docs/authentication>`__.
 
 **Reminder**: The ``access_token`` is *per user*. It is associated with a 
 single user. If StackAPI is acting on behalf of multiple users, the token
@@ -250,7 +250,7 @@ This value can be found by checking which options are valid for the flag.
     >>> flag_options = SITE.fetch('comments/123/flags/options')
 	
 Assuming that comment ``123`` is valid, 
-`this call <https://api.stackexchange.com/docs/comment-flag-options>`
+`this call <https://api.stackexchange.com/docs/comment-flag-options>`__
 will return a list of valid flags. From here, you select the ``option_id``
 that matches the reason you want to flag. When you pass that via ``send_data``
 in the ``option_id`` flag, StackAPI will issue a flag on behalf of the user
