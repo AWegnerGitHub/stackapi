@@ -71,7 +71,22 @@ When contributing code, you'll want to follow this checklist:
    GitHub Pull Requests are the expected method of code collaboration on this
    project.
 
+Running Tests
+~~~~~~~~~~~~~
+
+To be able to run the test suite, you'll need to have `mock`_ installed. Mock is
+on the Python Package Index, so you can install it simply with one command:
+
+    $ pip install mock
+
+Tests are built and run using `unittest`_, which comes as a standard package with
+every Python installation. You can run the tests using the following command
+(from the root directory of your clone):
+
+    $ python -m unittest discover tests/
+
 .. _mock: https://pypi.python.org/pypi/mock
+.. _unittest: https://docs.python.org/2/library/unittest.html
 
 Code Review
 ~~~~~~~~~~~
