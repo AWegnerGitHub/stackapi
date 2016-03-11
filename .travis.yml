@@ -10,13 +10,13 @@ install:
 script:
   - python -m unittest discover
 deploy:
-  # PyPI test
   provider: pypi
   distributions: sdist
-  server: https://testpypi.python.org/pypi
+  # Uncomment the next line to deploy to PyPI test
+#  server: https://testpypi.python.org/pypi
   user: AWegnerGitHub
   password:
       secure: "TOvPbb11T/upCy/6SzYz3E4etUGmQndBkqiQw9up7otv/9koQCoiGT8ewP1NbePmtGNcEDFUrT4OGtZJ7+GeRJXBwyqbDxwGU8nyRR0qRQfix58VvAzA86noev7ULEx1Cct7EULe0NspS1bTslV/t91H3Npdj22G2yLKIi0z3buzR0NMxPVGE1s7D0G6SIm3U669IjOeFZ9Mi7eGks1x/bs3pGQHwVCxix24KDBA9ioCRmojnH6UgWcXrNuhLwms6ojtuLlLx0+pg8o6JdBwCV2uvDLddqtPGaNlMD8bSeL1n9mu+WNYbC/yqO9F1xkNP5jg8loa/MmACn+cIi7qNbxYSd18mloYtKlg9u80KM4zhXRRppPFXvj1vVrw68QLkkryj0I45JGEnXtlEoOPtHw8Bh7EP4sp3zxmtLlWfOEne6lgApRzxYmkUoJsPae6a9hbSuvLtXgurfHnz5u3w91lz5dxm/AfDm5Vhyid2w5PADyUoevWx3fw9Ld0Mcv5/UMrD8oVg2qXT49ye01FHtblzTqA+En/sPCZ5quQ2FUc00fu0eE4qpZQGV21zdqsXt0hll5bZjZ5ziVxxslhol96argHybWCM6pRkoQfMerJuCFeJoepLZ8azdlRFHMrDp/vpy6gb1ODUygDNByd/s9PMYZWtz+LkwnF/fbBOaU="
   on:
-    tags: false
+    tags: true
     branch: master

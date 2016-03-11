@@ -1,17 +1,12 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-from fabric.api import task, local, env, put
+
 import re
-import fileinput
-import os
-import datetime
 import subprocess
-import requests
-try:
-    import simplejson as json
-except: 
-    import json
+
+from fabric.api import task
+
 
 @task
 def release(part='patch'):
@@ -50,15 +45,14 @@ def release(part='patch'):
     bv_args += ['--new-version', version]
 
     subprocess.check_output(bv_args)
-#    deploy(version)
 
-
-@task
-def deploy(version=None):
-    if not version:
-        version = subprocess.check_output(['python',
-                                           'setup.py', '--version']).strip()
-
-    # Build the package
-    subprocess.check_output(['python', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])
-
+# @task
+# def deploy(version=None):
+#     """Since I handle deployment in Travis CI, this should never be called"""
+#     if not version:
+#         version = subprocess.check_output(['python',
+#                                            'setup.py', '--version']).strip()
+#
+#     # Build the package
+#     subprocess.check_output(['python', 'setup.py', 'sdist', 'upload', '-r', 'pypi'])
+#
