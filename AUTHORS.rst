@@ -9,4 +9,7 @@ Andrew Wegner `@AWegnerGitHub <https://github.com/AWegnerGitHub/stackapi>`_
 Patches and Suggestions
 ```````````````````````
 
-No one else, yet. :ref:`Contribute <contributing>` a feature and get your name here!
+`@ArtOfCode- <https://github.com/ArtOfCode->`_
+
+
+:ref:`Contribute <contributing>` a feature and get your name here!

@@ -75,18 +75,22 @@ Running Tests
 ~~~~~~~~~~~~~
 
 To be able to run the test suite, you'll need to have `mock`_ installed. Mock is
-on the Python Package Index, so you can install it simply with one command:
+on the Python Package Index, so you can install it simply with one command::
 
     $ pip install mock
 
 Tests are built and run using `unittest`_, which comes as a standard package with
 every Python installation. You can run the tests using the following command
-(from the root directory of your clone):
+(from the root directory of your clone)::
 
-    $ python -m unittest discover tests/
+    $ python -m unittest discover
 
 .. _mock: https://pypi.python.org/pypi/mock
 .. _unittest: https://docs.python.org/2/library/unittest.html
+
+The ``mock`` installation step can be handled automatically, if you run tests via::
+
+    $ python setup.py test
 
 Code Review
 ~~~~~~~~~~~
