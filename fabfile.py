@@ -50,7 +50,7 @@ def release(part='patch'):
     bv_args += ['--new-version', version]
 
     subprocess.check_output(bv_args)
-    deploy(version)
+#    deploy(version)
 
 
 @task
