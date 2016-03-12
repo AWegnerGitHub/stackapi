@@ -171,7 +171,7 @@ class StackAPI(object):
             params['site'] = self._api_key
 
         data = []
-        run_cnt = 0
+        run_cnt = 1
         backoff = 0
         total = 0
         while run_cnt <= self.max_pages:
