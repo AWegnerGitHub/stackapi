@@ -7,7 +7,7 @@ Exchange API v2.2.
   :alt: Build Status
 
 .. image:: https://readthedocs.org/projects/stackapi/badge/?version=latest
-  :target: http://stackapi.readthedocs.org/en/latest/?badge=latest
+  :target: http://stackapi.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
 
 This library has support for:
@@ -40,4 +40,4 @@ The above, will issue a call to the
 .. _comments: http://api.stackexchange.com/docs/comments
 
 Much more detailed documentation is available on
-`ReadTheDocs <http://stackapi.readthedocs.org/>`__.
+`ReadTheDocs <http://stackapi.readthedocs.io/>`__.
