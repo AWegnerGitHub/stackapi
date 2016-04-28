@@ -56,11 +56,11 @@ class StackAPI(object):
         if not name:
             raise ValueError('No Site Name provided')
 
-        self.proxy = kwargs['proxy'] if kwargs.get('proxy') else None
-        self.max_pages = kwargs['max_pages'] if kwargs.get('max_pages') else 5
-        self.page_size = kwargs['page_size'] if kwargs.get('page_size') else 100
-        self.key = kwargs['key'] if kwargs.get('key') else None
-        self.access_token = kwargs['access_token'] if kwargs.get('access_token') else None
+        self.proxy = kwargs.get('proxy', None)
+        self.max_pages = kwargs.get('max_pages', 5)
+        self.page_size = kwargs.get('page_size', 100)
+        self.key = kwargs.get('key', None)
+        self.access_token = kwargs.get('access_token', None)
         self._endpoint = None
         self._api_key = None
         self._name = None
@@ -171,7 +171,7 @@ class StackAPI(object):
             params['site'] = self._api_key
 
         data = []
-        run_cnt = 0
+        run_cnt = 1
         backoff = 0
         total = 0
         while run_cnt <= self.max_pages:
