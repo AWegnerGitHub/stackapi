@@ -115,10 +115,10 @@ The exception has several values available to help troubleshoot the underlying
 issue::
 
     except stackapi.StackAPIError as e:
-        print("   Error URL: %s" % (e.url))
-        print("   Error Number: %s" % (e.error))
-        print("   Error Code: %s" % (e.code))
-        print("   Error Message: %s" % (e.message))
+        print("   Error URL: {}".format(e.url))
+        print("   Error Code: {}".format(e.error_code))
+        print("   Error Name: {}".format(e.error_name))
+        print("   Error Message: {}".format(e.error_message))
 
 This will print out the URL that was being accessed, the error number that the
 API returns, the error code the API returns and the error message the API
