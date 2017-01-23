@@ -4,6 +4,7 @@ from time import sleep
 import json
 import datetime
 import calendar
+import requests.compat
 
 
 class StackAPIError(Exception):
@@ -148,7 +149,7 @@ class StackAPI(object):
         #   badges/222;1306;99999
         for k, value in kwargs.items():
             if "{" + k + "}" in endpoint:
-                endpoint = endpoint.replace("{"+k+"}", ';'.join(str(x) for x in value))
+                endpoint = endpoint.replace("{"+k+"}", ';'.join(requests.compat.quote_plus(str(x)) for x in value))
                 kwargs.pop(k, None)
             
         date_time_keys = ['fromdate', 'todate', 'since', 'min', 'max']
