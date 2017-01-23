@@ -116,9 +116,9 @@ issue::
 
     except stackapi.StackAPIError as e:
         print("   Error URL: {}".format(e.url))
-        print("   Error Code: {}".format(e.error_code))
-        print("   Error Name: {}".format(e.error_name))
-        print("   Error Message: {}".format(e.error_message))
+        print("   Error Code: {}".format(e.code))
+        print("   Error Error: {}".format(e.error))
+        print("   Error Message: {}".format(e.message))
 
 This will print out the URL that was being accessed, the error number that the
 API returns, the error code the API returns and the error message the API
