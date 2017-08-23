@@ -147,7 +147,7 @@ class StackAPI(object):
         # This block will replace {ids} placeholds in end points
         # converting .fetch('badges/{ids}', ids=[222, 1306, 99999]) to
         #   badges/222;1306;99999
-        for k, value in kwargs.items():
+        for k, value in list(kwargs.items()):
             if "{" + k + "}" in endpoint:
                 endpoint = endpoint.replace("{"+k+"}", ';'.join(requests.compat.quote_plus(str(x)) for x in value))
                 kwargs.pop(k, None)
