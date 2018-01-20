@@ -28,7 +28,7 @@ Now we want to retrieve the most recent comments from Stack Overflow::
     >>> SITE = StackAPI('stackoverflow')
     >>> comments = SITE.fetch('comments')
 
-This will return the 600 most recent comments on Stack Overflow, using the
+This will return the 500 most recent comments on Stack Overflow, using the
 default filter the API provides. The value passed to
 :meth:`fetch <stackapi.StackAPI.fetch>` is an end point defined in the
 `Stack Exchange API <http://api.stackexchange.com/>`__.
@@ -41,8 +41,8 @@ queries. Take a look at the :ref:`Advanced Usage <advanced>` examples.
 Change number of results
 ------------------------
 
-By default, StackAPI will return up to 600 items in a single call. It may be
-less than this, if there are less than 600 items to return. This is common
+By default, StackAPI will return up to 500 items in a single call. It may be
+less than this, if there are less than 500 items to return. This is common
 on new or low traffic sites.
 
 The number of results can be modified by changing the ``page_size``
