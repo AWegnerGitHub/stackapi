@@ -1,7 +1,6 @@
 import requests
 from itertools import chain
 from time import sleep
-import json
 import datetime
 import calendar
 import requests.compat
@@ -220,7 +219,6 @@ class StackAPI(object):
                 params["page"] += 1
             else:
                 break
-
 
         r = []
         for d in data:
