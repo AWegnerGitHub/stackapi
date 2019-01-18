@@ -216,7 +216,7 @@ class StackAPI(object):
                 sleep(backoff+1)        # Sleep an extra second to ensure no timing issues
             if 'total' in response:
                 total = response['total']
-            if 'has_more' in response and response['has_more']:
+            if 'has_more' in response and response['has_more'] and run_cnt <= self.max_pages:
                 params["page"] += 1
             else:
                 break
