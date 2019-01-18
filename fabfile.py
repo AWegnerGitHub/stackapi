@@ -36,7 +36,7 @@ def release(part='patch'):
     bumpver = subprocess.check_output(
         ['bumpversion', part, '--dry-run', '--verbose'],
         stderr=subprocess.STDOUT)
-    m = re.search(r'New version will be \'(\d+\.\d+\.\d+)\'', bumpver)
+    m = re.search(r'New version will be \'(\d+\.\d+\.\d+)\'', bumpver.decode('utf-8'))
     version = m.groups(0)[0]
 
     # Really run bumpver to set the new release and tag
