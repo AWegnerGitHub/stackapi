@@ -224,12 +224,13 @@ class StackAPI(object):
 
         r = []
         for d in data:
+            if 'items' in d:
             r.extend(d['items'])
         result = {'backoff': backoff,
-                  'has_more': data[-1]['has_more'],
+                  'has_more': False if 'has_more' not in data[-1] else data[-1]['has_more'],
                   'page': params['page'],
-                  'quota_max': data[-1]['quota_max'],
-                  'quota_remaining': data[-1]['quota_remaining'],
+                  'quota_max': -1 if 'quota_max' not in data[-1] else data[-1]['quota_max'],
+                  'quota_remaining': -1 if 'quota_remaining' not in data[-1] else data[-1]['quota_max'],
                   'total': total,
                   'items': list(chain(r))}
 
