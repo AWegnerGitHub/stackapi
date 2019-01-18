@@ -9,10 +9,10 @@ import requests.compat
 class StackAPIError(Exception):
     """
     The Exception that is thrown when ever there is an API error.
-    
+
     This utilizes the values returned by the API and described
     here: http://api.stackexchange.com/docs/types/error
-    
+
     :param url: (string) The URL that was called and generated an error
     :param error: (int) The `error_id` returned by the API (should be an int)
     :param code: (string) The `description` returned by the API and is human friendly
@@ -30,7 +30,7 @@ class StackAPI(object):
     def __init__(self, name=None, version="2.2", **kwargs):
         """
         The object used to interact with the Stack Exchange API
-        
+
         :param name: (string) **(Required)** A valid ``api_site_parameter``
             (available from http://api.stackexchange.com/docs/sites) which will
             be used to connect to a particular site on the Stack Exchange
@@ -79,38 +79,38 @@ class StackAPI(object):
             raise ValueError('Invalid Site Name provided')
 
     def __repr__(self):
-        return "<{}> v:<{}> endpoint: {}  Last URL: {}".format(self._name, 
-                                                               self._version, 
-                                                               self._endpoint, 
+        return "<{}> v:<{}> endpoint: {}  Last URL: {}".format(self._name,
+                                                               self._version,
+                                                               self._endpoint,
                                                                self._previous_call)
 
     def fetch(self, endpoint=None, page=1, key=None, filter='default', **kwargs):
         """Returns the results of an API call.
-        
-        This is the main work horse of the class. It builds the API query 
-        string and sends the request to Stack Exchange. If there are multiple 
-        pages of results, and we've configured `max_pages` to be greater than 
-        1, it will automatically paginate through the results and return a 
+
+        This is the main work horse of the class. It builds the API query
+        string and sends the request to Stack Exchange. If there are multiple
+        pages of results, and we've configured `max_pages` to be greater than
+        1, it will automatically paginate through the results and return a
         single object.
-        
-        Returned data will appear in the `items` key of the resulting 
+
+        Returned data will appear in the `items` key of the resulting
         dictionary.
 
         :param endpoint: (string) The API end point being called. Available endpoints are listed on
             the official API documentation: http://api.stackexchange.com/docs
-            
+
             This can be as simple as ``fetch('answers')``, to call the answers
             end point
-            
+
             If calling an end point that takes additional parameter, such as `id`s
-            pass the ids as a list to the `ids` key: 
+            pass the ids as a list to the `ids` key:
 
                 .. code-block:: python
 
                     fetch('answers/{}', ids=[1,2,3])
-                
+
             This will attempt to retrieve the answers for the three listed ids.
-            
+
             If no end point is passed, a ``ValueError`` will be raised
         :param page: (int) The page in the results to start at. By default, it will start on
             the first page and automatically paginate until the result set
@@ -118,7 +118,7 @@ class StackAPI(object):
         :param key: (string) The site you are issuing queries to.
         :param filter: (string) The filter to utilize when calling an endpoint. Different filters
             will return different keys. The default is ``default`` and this will
-            still vary depending on what the API returns as default for a 
+            still vary depending on what the API returns as default for a
             particular endpoint
         :param kwargs: Parameters accepted by individual endpoints. These parameters
             **must** be named the same as described in the endpoint documentation
@@ -150,7 +150,7 @@ class StackAPI(object):
             if "{" + k + "}" in endpoint:
                 endpoint = endpoint.replace("{"+k+"}", ';'.join(requests.compat.quote_plus(str(x)) for x in value))
                 kwargs.pop(k, None)
-            
+
         date_time_keys = ['fromdate', 'todate', 'since', 'min', 'max']
         for k in date_time_keys:
             if k in kwargs:
@@ -223,7 +223,7 @@ class StackAPI(object):
         r = []
         for d in data:
             if 'items' in d:
-            r.extend(d['items'])
+                r.extend(d['items'])
         result = {'backoff': backoff,
                   'has_more': False if 'has_more' not in data[-1] else data[-1]['has_more'],
                   'page': params['page'],
@@ -236,16 +236,16 @@ class StackAPI(object):
 
     def send_data(self, endpoint=None, page=1, key=None, filter='default', **kwargs):
         """Sends data to the API.
-        
+
         This call is similar to ``fetch``, but **sends** data to the API instead
-        of retrieving it. 
-                
+        of retrieving it.
+
         Returned data will appear in the ``items`` key of the resulting
         dictionary.
-        
+
         Sending data **requires** that the ``access_token`` is set. This is enforced
         on the API side, not within this library.
-        
+
         :param endpoint: (string) The API end point being called. Available endpoints are listed on
             the official API documentation: http://api.stackexchange.com/docs
 
