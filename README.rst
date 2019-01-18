@@ -2,10 +2,6 @@ This is a Python wrappers for the `Stack Exchange
 API <http://api.stackexchange.com/>`__. This library supports Stack
 Exchange API v2.2.
 
-.. image:: https://travis-ci.org/AWegnerGitHub/stackapi.svg?branch=master
-  :target: https://travis-ci.org/AWegnerGitHub/stackapi
-  :alt: Build Status
-
 .. image:: https://readthedocs.org/projects/stackapi/badge/?version=latest
   :target: http://stackapi.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
