@@ -30,7 +30,7 @@ Supported Features
 -  Throw exceptions returned by the API for easier troubleshooting.
 -  Utilize `Requests <http://docs.python-requests.org/>`__.
 
-StackAPI is supported on Python 2.7 - 3.5.
+StackAPI is supported on Python 2.7 - 3.7.
 
 User Guide
 ----------
@@ -70,6 +70,3 @@ portion of the documentation.
    dev/contributing
    dev/todo
    dev/authors
-
-
-

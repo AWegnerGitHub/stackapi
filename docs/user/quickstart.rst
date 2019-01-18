@@ -126,3 +126,20 @@ returns. Using these values, it should be possible to determine the cause of
 the error. The error code, message and number are all available in the
 `documentation <http://api.stackexchange.com/docs/errors#filter=default&run=true>`__.
 
+.. _quota-notes:
+
+Note about Quotas
+-----------------
+
+Stack Exchange attempts to prevent abuse of their API by implementing a number
+of `throttles <https://api.stackexchange.com/docs/throttle>`__. The quote values
+that you have remaining are returned with more filters that StackAPI utilizes.
+These appear as ``quota_remaining`` and ``quota_max`` values.
+
+In some instances though (for example when using a ``filter='total'``), these
+are not part of the Stack Exchange response. In these instances, StackAPI will
+set the values to ``-1``. This is to make it clear that StackAPI does not know
+the values and not provide you with an incorrect, positive, value.
+
+To get accurate values for these two fields, you need to ensure that your
+filters contain ``quota_remaining`` and ``quota_max``.
