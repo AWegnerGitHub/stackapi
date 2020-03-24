@@ -4,6 +4,7 @@ from time import sleep
 import datetime
 import calendar
 import requests.compat
+import six
 
 
 class StackAPIError(Exception):
@@ -148,7 +149,20 @@ class StackAPI(object):
         #   badges/222;1306;99999
         for k, value in list(kwargs.items()):
             if "{" + k + "}" in endpoint:
-                endpoint = endpoint.replace("{"+k+"}", ';'.join(requests.compat.quote_plus(str(x)) for x in value))
+                # using six for backwards compatibility
+                if isinstance(value, six.string_types):
+                    endpoint = endpoint.replace("{" + k + "}", requests.compat.quote_plus(str(value)))
+                else:
+                    # check if value is iterable, based on
+                    # https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
+                    # notice that a string is also an iterable, that's why it's checked first
+                    try:
+                        iterator = iter(value)
+                        endpoint = endpoint.replace("{" + k + "}", ';'.join(requests.compat.quote_plus(str(x)) for x in iterator))
+                    except TypeError:
+                        # it's not an iterable, represent as string
+                        endpoint = endpoint.replace("{" + k + "}", requests.compat.quote_plus(str(value)))
+
                 kwargs.pop(k, None)
 
         date_time_keys = ['fromdate', 'todate', 'since', 'min', 'max']

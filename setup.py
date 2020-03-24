@@ -15,7 +15,7 @@ setup(
     keywords='stackexchange',
     packages=find_packages(exclude=['contrib', 'docs', 'tests*', 'test']),
     version='0.1.12',
-    install_requires=['requests'],
+    install_requires=['requests', 'six'],
     tests_require=['mock'],
     classifiers=[
         'Development Status :: 4 - Beta',
