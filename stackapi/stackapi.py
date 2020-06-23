@@ -242,7 +242,7 @@ class StackAPI(object):
                   'has_more': False if 'has_more' not in data[-1] else data[-1]['has_more'],
                   'page': params['page'],
                   'quota_max': -1 if 'quota_max' not in data[-1] else data[-1]['quota_max'],
-                  'quota_remaining': -1 if 'quota_remaining' not in data[-1] else data[-1]['quota_max'],
+                  'quota_remaining': -1 if 'quota_remaining' not in data[-1] else data[-1]['quota_remaining'],
                   'total': total,
                   'items': list(chain(r))}
 
