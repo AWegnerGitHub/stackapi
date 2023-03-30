@@ -22,7 +22,7 @@ Source Code
 StackAPI is developed on GitHub where the code is
 `always available <https://github.com/AWegnerGitHub/stackapi>`_.
 
-You can close the repository::
+You can clone the repository::
 
     $ git clone git://github.com/AWegnerGitHub/stackapi.git
 
