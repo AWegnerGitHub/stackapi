@@ -28,7 +28,7 @@ class StackAPIError(Exception):
 
 
 class StackAPI(object):
-    def __init__(self, name=None, version="2.2", **kwargs):
+    def __init__(self, name=None, version="2.2", base_url="https://api.stackexchange.com", **kwargs):
         """
         The object used to interact with the Stack Exchange API
 
@@ -38,6 +38,8 @@ class StackAPI(object):
             Network.
         :param version: (float) **(Required)** The version of the API you are connecting to.
             The default of ``2.2`` is the current version
+        :param base_url: (string) (optional) The base URL for the Stack Exchange API.
+            The default is https://api.stackexchange.com
         :param proxy: (dict) (optional) A dictionary of http and https proxy locations
             Example:
 
@@ -68,7 +70,7 @@ class StackAPI(object):
         self._version = version
         self._previous_call = None
 
-        self._base_url = 'https://api.stackexchange.com/{}/'.format(version)
+        self._base_url = '{}/{}/'.format(base_url, version)
         sites = self.fetch('sites', filter='!*L1*AY-85YllAr2)', pagesize=1000)
         for s in sites['items']:
             if name == s['api_site_parameter']:

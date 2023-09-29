@@ -10,6 +10,7 @@ Patches and Suggestions
 ```````````````````````
 
 `@ArtOfCode- <https://github.com/ArtOfCode->`_
+`@bgrnwdvg - <https://github.com/bgrnwdvg>`
 
 
 :ref:`Contribute <contributing>` a feature and get your name here!
