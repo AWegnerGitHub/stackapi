@@ -80,7 +80,7 @@ class Test_StackAPI(unittest.TestCase):
     @patch('stackapi.StackAPI.fetch', fake_stackoverflow_exists)
     def test_override_base_url(self):
         """Testing that the base_url can be overridden"""
-        self.assertEqual(StackAPI('stackoverflow',version="2.3",base_url="https://api.mystacksite.com")._base_url, "https://api.mystacksite.com/2.3/")
+        self.assertEqual(StackAPI(name='stackoverflow',version="2.3",base_url="https://mystacksite.com/api",key="foo")._base_url, "https://mystacksite.com/api/2.3/",)
 
 if __name__ == '__main__':
     import sys

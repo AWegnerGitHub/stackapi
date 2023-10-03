@@ -36,6 +36,23 @@ default filter the API provides. The value passed to
 If you are looking for more information on how to tailor the results of your
 queries. Take a look at the :ref:`Advanced Usage <advanced>` examples.
 
+.. _enterprise-usage:
+
+Using with Stack Overflow for Teams
+-----------------------------------
+
+When using with Stack Overflow for Teams, the client has to be instantiated a
+bit differently::
+
+    >>> SITE = StackAPI('mystacksite.com', base_url='https://mystacksite.com/api', key='mykey')
+
+The ``name`` argument needs to match the ``api_site_parameter`` key from the
+``sites`` endpoint. This may be the domain (e.g. ``mystacksite.com``) or the
+name of the site (e.g. ``MyCompany Stack Overflow``). You'll most likely need to 
+`create an API key <https://stackoverflowteams.help/en/articles/4385859-stack-overflow-for-teams-api#create-a-pat>`_
+and pass that in to the ``key`` argument. Otherwise, everything else should
+function the same.
+
 .. _change-num-results:
 
 Change number of results
