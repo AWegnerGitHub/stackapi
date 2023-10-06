@@ -72,6 +72,15 @@ class Test_StackAPI(unittest.TestCase):
         self.assertEqual(cm.exception.error, 400)
         self.assertEqual(cm.exception.code, 'bad_parameter')
 
+    @patch('stackapi.StackAPI.fetch', fake_stackoverflow_exists)
+    def test_default_base_url(self):
+        """Testing that the base_url uses the default value"""
+        self.assertEqual(StackAPI('stackoverflow')._base_url, "https://api.stackexchange.com/2.2/")
+
+    @patch('stackapi.StackAPI.fetch', fake_stackoverflow_exists)
+    def test_override_base_url(self):
+        """Testing that the base_url can be overridden"""
+        self.assertEqual(StackAPI(name='stackoverflow',version="2.3",base_url="https://mystacksite.com/api",key="foo")._base_url, "https://mystacksite.com/api/2.3/",)
 
 if __name__ == '__main__':
     import sys

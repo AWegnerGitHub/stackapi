@@ -15,6 +15,7 @@ This library has support for:
    all the results into a single response.
 -  Throws exceptions returned by the API for easier troubleshooting.
 -  Utilizes `Requests <http://docs.python-requests.org/>`__.
+-  `Stack Overflow for Teams <https://stackoverflow.co/teams/>`_ API
 
 
 Example usage:
