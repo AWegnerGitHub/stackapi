@@ -28,7 +28,7 @@ class StackAPIError(Exception):
 
 
 class StackAPI(object):
-    def __init__(self, name=None, version="2.2", base_url="https://api.stackexchange.com", **kwargs):
+    def __init__(self, name=None, version="2.3", base_url="https://api.stackexchange.com", **kwargs):
         """
         The object used to interact with the Stack Exchange API
 
@@ -37,7 +37,7 @@ class StackAPI(object):
             be used to connect to a particular site on the Stack Exchange
             Network.
         :param version: (float) **(Required)** The version of the API you are connecting to.
-            The default of ``2.2`` is the current version
+            The default of ``2.3`` is the current version
         :param base_url: (string) (optional) The base URL for the Stack Exchange API.
             The default is https://api.stackexchange.com
         :param proxy: (dict) (optional) A dictionary of http and https proxy locations
@@ -57,37 +57,36 @@ class StackAPI(object):
             a user, to grant more permissions (such as write access)
         """
         if not name:
-            raise ValueError('No Site Name provided')
+            raise ValueError("No Site Name provided")
 
-        self.proxy = kwargs.get('proxy', None)
-        self.max_pages = kwargs.get('max_pages', 5)
-        self.page_size = kwargs.get('page_size', 100)
-        self.key = kwargs.get('key', None)
-        self.access_token = kwargs.get('access_token', None)
+        self.proxy = kwargs.get("proxy", None)
+        self.max_pages = kwargs.get("max_pages", 5)
+        self.page_size = kwargs.get("page_size", 100)
+        self.key = kwargs.get("key", None)
+        self.access_token = kwargs.get("access_token", None)
         self._endpoint = None
         self._api_key = None
         self._name = None
         self._version = version
         self._previous_call = None
 
-        self._base_url = '{}/{}/'.format(base_url, version)
-        sites = self.fetch('sites', filter='!*L1*AY-85YllAr2)', pagesize=1000)
-        for s in sites['items']:
-            if name == s['api_site_parameter']:
-                self._name = s['name']
-                self._api_key = s['api_site_parameter']
+        self._base_url = "{}/{}/".format(base_url, version)
+        sites = self.fetch("sites", filter="!*L1*AY-85YllAr2)", pagesize=1000)
+        for s in sites["items"]:
+            if name == s["api_site_parameter"]:
+                self._name = s["name"]
+                self._api_key = s["api_site_parameter"]
                 break
 
         if not self._name:
-            raise ValueError('Invalid Site Name provided')
+            raise ValueError("Invalid Site Name provided")
 
     def __repr__(self):
-        return "<{}> v:<{}> endpoint: {}  Last URL: {}".format(self._name,
-                                                               self._version,
-                                                               self._endpoint,
-                                                               self._previous_call)
+        return "<{}> v:<{}> endpoint: {}  Last URL: {}".format(
+            self._name, self._version, self._endpoint, self._previous_call
+        )
 
-    def fetch(self, endpoint=None, page=1, key=None, filter='default', **kwargs):
+    def fetch(self, endpoint=None, page=1, key=None, filter="default", **kwargs):
         """Returns the results of an API call.
 
         This is the main work horse of the class. It builds the API query
@@ -131,20 +130,16 @@ class StackAPI(object):
             ``items`` tag.
         """
         if not endpoint:
-            raise ValueError('No end point provided.')
+            raise ValueError("No end point provided.")
 
         self._endpoint = endpoint
 
-        params = {
-            "pagesize": self.page_size,
-            "page": page,
-            "filter": filter
-        }
+        params = {"pagesize": self.page_size, "page": page, "filter": filter}
 
         if self.key:
-            params['key'] = self.key
+            params["key"] = self.key
         if self.access_token:
-            params['access_token'] = self.access_token
+            params["access_token"] = self.access_token
 
         # This block will replace {ids} placeholds in end points
         # converting .fetch('badges/{ids}', ids=[222, 1306, 99999]) to
@@ -160,14 +155,16 @@ class StackAPI(object):
                     # notice that a string is also an iterable, that's why it's checked first
                     try:
                         iterator = iter(value)
-                        endpoint = endpoint.replace("{" + k + "}", ';'.join(requests.compat.quote_plus(str(x)) for x in iterator))
+                        endpoint = endpoint.replace(
+                            "{" + k + "}", ";".join(requests.compat.quote_plus(str(x)) for x in iterator)
+                        )
                     except TypeError:
                         # it's not an iterable, represent as string
                         endpoint = endpoint.replace("{" + k + "}", requests.compat.quote_plus(str(value)))
 
                 kwargs.pop(k, None)
 
-        date_time_keys = ['fromdate', 'todate', 'since', 'min', 'max']
+        date_time_keys = ["fromdate", "todate", "since", "min", "max"]
         for k in date_time_keys:
             if k in kwargs:
                 if isinstance(kwargs[k], datetime.datetime):
@@ -177,14 +174,14 @@ class StackAPI(object):
         # This would occur if the developer passed `badges` instead of `badges/{ids}` to `fetch`
         # If this is the case, then convert to a string and assume this goes at the end of the endpoint
 
-        if 'ids' in kwargs:
-            ids = ';'.join(str(x) for x in kwargs['ids'])
-            kwargs.pop('ids', None)
+        if "ids" in kwargs:
+            ids = ";".join(str(x) for x in kwargs["ids"])
+            kwargs.pop("ids", None)
             endpoint += "/{}".format(ids)
 
         params.update(kwargs)
         if self._api_key:
-            params['site'] = self._api_key
+            params["site"] = self._api_key
 
         data = []
         run_cnt = 1
@@ -202,7 +199,7 @@ class StackAPI(object):
 
             self._previous_call = response.url
             try:
-                response.encoding = 'utf-8-sig'
+                response.encoding = "utf-8-sig"
                 response = response.json()
             except ValueError as e:
                 raise StackAPIError(self._previous_call, str(e), str(e), str(e))
@@ -226,31 +223,33 @@ class StackAPI(object):
             backoff = 0
             total = 0
             page = 1
-            if 'backoff' in response:
-                backoff = int(response['backoff'])
-                sleep(backoff+1)        # Sleep an extra second to ensure no timing issues
-            if 'total' in response:
-                total = response['total']
-            if 'has_more' in response and response['has_more'] and run_cnt <= self.max_pages:
+            if "backoff" in response:
+                backoff = int(response["backoff"])
+                sleep(backoff + 1)  # Sleep an extra second to ensure no timing issues
+            if "total" in response:
+                total = response["total"]
+            if "has_more" in response and response["has_more"] and run_cnt <= self.max_pages:
                 params["page"] += 1
             else:
                 break
 
         r = []
         for d in data:
-            if 'items' in d:
-                r.extend(d['items'])
-        result = {'backoff': backoff,
-                  'has_more': False if 'has_more' not in data[-1] else data[-1]['has_more'],
-                  'page': params['page'],
-                  'quota_max': -1 if 'quota_max' not in data[-1] else data[-1]['quota_max'],
-                  'quota_remaining': -1 if 'quota_remaining' not in data[-1] else data[-1]['quota_remaining'],
-                  'total': total,
-                  'items': list(chain(r))}
+            if "items" in d:
+                r.extend(d["items"])
+        result = {
+            "backoff": backoff,
+            "has_more": False if "has_more" not in data[-1] else data[-1]["has_more"],
+            "page": params["page"],
+            "quota_max": -1 if "quota_max" not in data[-1] else data[-1]["quota_max"],
+            "quota_remaining": -1 if "quota_remaining" not in data[-1] else data[-1]["quota_remaining"],
+            "total": total,
+            "items": list(chain(r)),
+        }
 
         return result
 
-    def send_data(self, endpoint=None, page=1, key=None, filter='default', **kwargs):
+    def send_data(self, endpoint=None, page=1, key=None, filter="default", **kwargs):
         """Sends data to the API.
 
         This call is similar to ``fetch``, but **sends** data to the API instead
@@ -294,30 +293,26 @@ class StackAPI(object):
             ``items`` tag.
         """
         if not endpoint:
-            raise ValueError('No end point provided.')
+            raise ValueError("No end point provided.")
 
         self._endpoint = endpoint
 
-        params = {
-            "pagesize": self.page_size,
-            "page": page,
-            "filter": filter
-        }
+        params = {"pagesize": self.page_size, "page": page, "filter": filter}
 
         if self.key:
-            params['key'] = self.key
+            params["key"] = self.key
         if self.access_token:
-            params['access_token'] = self.access_token
+            params["access_token"] = self.access_token
 
-        if 'ids' in kwargs:
-            ids = ';'.join(str(x) for x in kwargs['ids'])
-            kwargs.pop('ids', None)
+        if "ids" in kwargs:
+            ids = ";".join(str(x) for x in kwargs["ids"])
+            kwargs.pop("ids", None)
         else:
             ids = None
 
         params.update(kwargs)
         if self._api_key:
-            params['site'] = self._api_key
+            params["site"] = self._api_key
 
         data = []
 
@@ -337,11 +332,13 @@ class StackAPI(object):
         data.append(response)
         r = []
         for d in data:
-            r.extend(d['items'])
-        result = {'has_more': data[-1]['has_more'],
-                  'page': params['page'],
-                  'quota_max': data[-1]['quota_max'],
-                  'quota_remaining': data[-1]['quota_remaining'],
-                  'items': list(chain(r))}
+            r.extend(d["items"])
+        result = {
+            "has_more": data[-1]["has_more"],
+            "page": params["page"],
+            "quota_max": data[-1]["quota_max"],
+            "quota_remaining": data[-1]["quota_remaining"],
+            "items": list(chain(r)),
+        }
 
         return result
