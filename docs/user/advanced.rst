@@ -77,7 +77,7 @@ a score of at least 20 and are tagged ``python``::
 
 We can see that a single question matched our criteria.
 
-**Note**: In the above example, we passed a timestamp value to the ``fromdate`
+**Note**: In the above example, we passed a timestamp value to the ``fromdate``
 and ``todate`` parameters. StackAPI will also allow you to pass in 
 ``datetime`` objects and automatically perform this conversion for you.
 
