@@ -4,7 +4,7 @@
 import json
 import os.path
 import unittest
-from mock import patch
+from unittest.mock import patch
 from stackapi import StackAPI
 from stackapi import StackAPIError
 
