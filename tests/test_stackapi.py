@@ -34,10 +34,9 @@ def fake_users(self, endpoint=None, page=1, key=None, filter="default", **kwargs
 
 class Test_StackAPI(unittest.TestCase):
     def test_no_site_provided(self):
-        """Testing that it raises the correct error when no site is provided"""
-        with self.assertRaises(ValueError) as cm:
-            site = StackAPI()
-            self.assertEqual("No Site Name provided", str(cm.exception))
+        """Testing that it excludes the `site` when no site is provided."""
+        site = StackAPI()
+        self.assertEqual(first=site._base_url, second="https://api.stackexchange.com/2.3/")
 
     def test_no_endpoint_provided(self):
         """Testing that it raises the correct error when no endpoint is provided"""
