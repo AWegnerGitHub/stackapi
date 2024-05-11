@@ -85,7 +85,7 @@ class Test_StackAPI(unittest.TestCase):
     def test_default_base_url(self):
         """Testing that the base_url uses the default value"""
         self.assertEqual(
-            StackAPI("stackoverflow")._base_url, "https://api.stackexchange.com/2.2/"
+            StackAPI("stackoverflow")._base_url, "https://api.stackexchange.com/2.3/"
         )
 
     @patch("stackapi.StackAPI.fetch", fake_stackoverflow_exists)
