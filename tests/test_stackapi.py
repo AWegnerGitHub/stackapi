@@ -94,11 +94,11 @@ class Test_StackAPI(unittest.TestCase):
         self.assertEqual(
             StackAPI(
                 name="stackoverflow",
-                version="2.3",
+                version="2.2",
                 base_url="https://mystacksite.com/api",
                 key="foo",
             )._base_url,
-            "https://mystacksite.com/api/2.3/",
+            "https://mystacksite.com/api/2.2/",
         )
 
 
