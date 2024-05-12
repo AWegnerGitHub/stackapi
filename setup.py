@@ -14,7 +14,7 @@ setup(
     license="MIT",
     keywords="stackexchange",
     packages=find_packages(exclude=["contrib", "docs", "tests*", "test"]),
-    version="0.3.0",
+    version="0.3.1",
     install_requires=["requests", "six"],
     tests_require=["mock"],
     classifiers=[
