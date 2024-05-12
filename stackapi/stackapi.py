@@ -1,8 +1,9 @@
-import requests
+import calendar
+import datetime
 from itertools import chain
 from time import sleep
-import datetime
-import calendar
+
+import requests
 import requests.compat
 import six
 
@@ -32,7 +33,7 @@ class StackAPI(object):
         """
         The object used to interact with the Stack Exchange API
 
-        :param name: (string) **(Required)** A valid ``api_site_parameter``
+        :param name: (string) A valid ``api_site_parameter`` or ``None``.
             (available from http://api.stackexchange.com/docs/sites) which will
             be used to connect to a particular site on the Stack Exchange
             Network.
@@ -56,8 +57,6 @@ class StackAPI(object):
         :param access_token: (string) (optional) An access token associated with an application and
             a user, to grant more permissions (such as write access)
         """
-        if not name:
-            raise ValueError("No Site Name provided")
 
         self.proxy = kwargs.get("proxy", None)
         self.max_pages = kwargs.get("max_pages", 5)
@@ -78,8 +77,11 @@ class StackAPI(object):
                 self._api_key = s["api_site_parameter"]
                 break
 
-        if not self._name:
-            raise ValueError("Invalid Site Name provided")
+        else:
+            # If ``name`` is not a valid ``api_site_parameter``
+            # or ``None``.
+            if name is not None:
+                raise ValueError("Invalid Site Name provided")
 
     def __repr__(self):
         return "<{}> v:<{}> endpoint: {}  Last URL: {}".format(
