@@ -5,8 +5,8 @@ import json
 import os.path
 import unittest
 from unittest.mock import patch
-from stackapi import StackAPI
-from stackapi import StackAPIError
+
+from stackapi import StackAPI, StackAPIError
 
 TESTS_DIRECTORY = "tests"
 directory = "tests/" if TESTS_DIRECTORY not in os.getcwd() else ""
@@ -64,10 +64,11 @@ class Test_StackAPI(unittest.TestCase):
         """Testing that it can retrieve data on end points that don't want
         the `site` parameter. Tested using Jeff Atwood's user id"""
         with patch("stackapi.StackAPI.fetch", fake_stackoverflow_exists) as mock_site:
-            site = StackAPI("stackoverflow")
-        site._api_key = None
+            site = StackAPI()
+
         with patch("stackapi.StackAPI.fetch", fake_users) as mock_users:
-            self.assertGreaterEqual(len(site.fetch("/users/1/associated")["items"]), 1)
+            results = site.fetch("/users/1/associated")
+            self.assertGreaterEqual(len(results["items"]), 1)
 
     def test_exceptions_thrown(self):
         """Testing that a StackAPIError is properly thrown
@@ -75,7 +76,6 @@ class Test_StackAPI(unittest.TestCase):
         This test hits the real API."""
         with self.assertRaises(StackAPIError) as cm:
             site = StackAPI("stackoverflow")
-            site._api_key = None
             site.fetch("errors/400")
         self.assertEqual(cm.exception.error, 400)
         self.assertEqual(cm.exception.code, "bad_parameter")
